@@ -13,7 +13,7 @@ export interface SEOInput {
   html: string;
 }
 export const analyzeSEO = async (input: SEOInput) => {
-  const model = "gemini-3.1-pro-preview";
+  const model: "gemini-2.0-flash"
   
   const prompt = `
     أنت نظام ذكاء اصطناعي متقدم متخصص في SEO التقني، وSEO داخل الصفحة، وتحسين مواقع الخدمات، وتدقيق هيكل HTML.
