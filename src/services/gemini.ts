@@ -40,7 +40,9 @@ export const analyzeSEO = async (input: SEOInput) => {
     Analyze and improve the page across multiple layers: Technical SEO, On-Page SEO, HTML semantic structure, Search intent alignment, Local SEO optimization, Content structure, Internal linking, Structured data, and Core Web Vitals optimization.
 
     IMPORTANT:
-    The output MUST be in Arabic language.
+    The output MUST be 100% in Arabic language. 
+All section titles, labels, badges, card headings, and ALL text must be in Arabic only. 
+Do NOT use any English words anywhere in the output.
     The output MUST follow the exact order and structure requested.
 
     OUTPUT FORMAT:
