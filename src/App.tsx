@@ -18,7 +18,7 @@ export default function App() {
       const analysis = await analyzeSEO(data);
       setResults(analysis);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+      setError(err instanceof Error ? err.message : 'حدث خطأ غير متوقع');
     } finally {
       setIsLoading(false);
     }
@@ -26,34 +26,34 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 pb-20" dir="rtl">
-      {/* Header */}
+      {/* الهيدر */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
               <BarChart3 className="text-white" size={18} />
             </div>
-            <span className="font-bold text-slate-900 tracking-tight">SEO Auditor Pro</span>
+            <span className="font-bold text-slate-900 tracking-tight">مدقق SEO الاحترافي</span>
           </div>
           <nav className="hidden md:flex items-center gap-6">
             <a href="#" className="text-sm font-medium text-slate-600 hover:text-slate-900">التوثيق</a>
             <a href="#" className="text-sm font-medium text-slate-600 hover:text-slate-900">أفضل الممارسات</a>
             <div className="h-4 w-px bg-slate-200" />
-            <span className="text-xs font-mono text-slate-400">v1.2.0-stable</span>
+            <span className="text-xs font-mono text-slate-400">v1.2.0</span>
           </nav>
         </div>
       </header>
 
       <main className="max-w-5xl mx-auto px-6 pt-12">
         <div className="mb-12 text-right">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             className="text-4xl font-bold text-slate-900 tracking-tight"
           >
             مدقق SEO التقني
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
@@ -64,13 +64,13 @@ export default function App() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Form Area */}
+          {/* منطقة الفورم */}
           <div className="lg:col-span-2">
             <SEOForm onSubmit={handleAudit} isLoading={isLoading} />
-            
+
             <AnimatePresence>
               {error && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
@@ -85,7 +85,7 @@ export default function App() {
             {results && <AuditResults results={results} />}
           </div>
 
-          {/* Sidebar / Info Panel */}
+          {/* الشريط الجانبي */}
           <div className="space-y-6 text-right">
             <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
               <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-4 flex items-center gap-2 justify-end">
@@ -97,7 +97,7 @@ export default function App() {
                   <Shield className="text-blue-500 shrink-0" size={18} />
                 </li>
                 <li className="flex gap-3 justify-end">
-                  <span className="text-sm text-slate-600">تحسين مؤشرات أداء الويب الحيوية (Core Web Vitals)</span>
+                  <span className="text-sm text-slate-600">تحسين مؤشرات أداء الويب الحيوية</span>
                   <Zap className="text-amber-500 shrink-0" size={18} />
                 </li>
                 <li className="flex gap-3 justify-end">
