@@ -1,13 +1,9 @@
 import { GoogleGenAI } from "@google/genai";
-
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-
 if (!API_KEY) {
-  throw new Error("Gemini API key is missing. Please configure VITE_GEMINI_API_KEY.");
+  throw new Error("مفتاح Gemini API مفقود. يرجى ضبط VITE_GEMINI_API_KEY.");
 }
-
 const ai = new GoogleGenAI({ apiKey: API_KEY });
-
 export interface SEOInput {
   mainKeyword: string;
   serviceType: string;
@@ -16,67 +12,64 @@ export interface SEOInput {
   url?: string;
   html: string;
 }
-
 export const analyzeSEO = async (input: SEOInput) => {
   const model = "gemini-3.1-pro-preview";
   
   const prompt = `
-    You are an advanced AI system specialized in Technical SEO, On-Page SEO, Service Website Optimization, and HTML structure auditing.
-    Your role is to act as a senior SEO consultant, technical auditor, and search intent analyst.
+    أنت نظام ذكاء اصطناعي متقدم متخصص في SEO التقني، وSEO داخل الصفحة، وتحسين مواقع الخدمات، وتدقيق هيكل HTML.
+    دورك هو العمل كمستشار SEO أول، ومدقق تقني، ومحلل نية بحث.
 
-    INPUT DATA:
-    1. Main Keyword: ${input.mainKeyword}
-    2. Service Type: ${input.serviceType}
-    3. Target City or Country: ${input.targetLocation}
-    4. Page Language: ${input.language}
-    5. Page URL: ${input.url || "Not provided"}
-    6. Full HTML code:
+    بيانات الإدخال:
+    1. الكلمة المفتاحية الرئيسية: ${input.mainKeyword}
+    2. نوع الخدمة: ${input.serviceType}
+    3. المدينة أو الدولة المستهدفة: ${input.targetLocation}
+    4. لغة الصفحة: ${input.language}
+    5. رابط الصفحة: ${input.url || "غير محدد"}
+    6. كود HTML الكامل:
     \`\`\`html
     ${input.html}
     \`\`\`
 
-    OBJECTIVE:
-    Transform the page into a technically perfect and highly optimized SEO page.
-    Analyze and improve the page across multiple layers: Technical SEO, On-Page SEO, HTML semantic structure, Search intent alignment, Local SEO optimization, Content structure, Internal linking, Structured data, and Core Web Vitals optimization.
+    الهدف:
+    تحويل الصفحة إلى صفحة محسّنة تقنياً وعالية الجودة من ناحية SEO.
+    قم بتحليل وتحسين الصفحة عبر طبقات متعددة: SEO التقني، SEO داخل الصفحة، الهيكل الدلالي لـ HTML، توافق نية البحث، تحسين SEO المحلي، هيكل المحتوى، الروابط الداخلية، البيانات المنظمة، وتحسين Core Web Vitals.
 
-    IMPORTANT:
-    The output MUST be 100% in Arabic language. 
-All section titles, labels, badges, card headings, and ALL text must be in Arabic only. 
-Do NOT use any English words anywhere in the output.
-    The output MUST follow the exact order and structure requested.
+    تعليمات مهمة جداً:
+    - يجب أن يكون الناتج بالكامل باللغة العربية فقط.
+    - لا تستخدم أي كلمة إنجليزية في العناوين أو التسميات أو الشارات أو أي نص آخر.
+    - حتى الكلمات التقنية مثل "warning" و"info" و"Technical SEO" يجب ترجمتها للعربية.
+    - يجب أن يتبع الناتج الترتيب والهيكل المطلوب بالضبط.
 
-    OUTPUT FORMAT:
-    Produce the result in this exact order:
-    1. SEO Issues Found (المشاكل المكتشفة في SEO)
-    2. Technical SEO Problems (المشاكل التقنية)
-    3. Search Intent Analysis (تحليل نية البحث)
-    4. Content Improvements (تحسينات المحتوى)
-    5. Keyword Expansion (توسيع الكلمات المفتاحية)
-    6. Internal Linking Suggestions (اقتراحات الروابط الداخلية)
-    7. Recommended Structured Data (البيانات المنظمة الموصى بها)
-    8. Performance Optimization Suggestions (اقتراحات تحسين الأداء)
-    9. Optimized HTML Head Section (قسم Head المحسن)
+    صيغة الناتج (بالترتيب التالي بالضبط):
+    1. المشاكل المكتشفة في SEO
+    2. المشاكل التقنية
+    3. تحليل نية البحث
+    4. تحسينات المحتوى
+    5. توسيع الكلمات المفتاحية
+    6. اقتراحات الروابط الداخلية
+    7. البيانات المنظمة الموصى بها
+    8. اقتراحات تحسين الأداء
+    9. قسم Head المحسن
 
-    RULES:
-    - Never remove useful content without justification
-    - Avoid keyword stuffing
-    - Follow Google SEO best practices
-    - Optimize for local service websites
-    - Maintain natural language readability
-    - Ensure headings follow logical hierarchy
-    - Keep improvements realistic and practical
-    - Return the output in Markdown format.
+    القواعد:
+    - لا تحذف محتوى مفيداً دون مبرر
+    - تجنب حشو الكلمات المفتاحية
+    - اتبع أفضل ممارسات Google في SEO
+    - حسّن لمواقع الخدمات المحلية
+    - حافظ على قابلية القراءة الطبيعية
+    - تأكد من أن العناوين تتبع تسلسلاً منطقياً
+    - اجعل التحسينات واقعية وعملية
+    - أرجع الناتج بصيغة Markdown.
+    - كل النص في الناتج يجب أن يكون عربياً 100% بدون أي استثناء.
   `;
-
   try {
     const response = await ai.models.generateContent({
       model,
       contents: [{ parts: [{ text: prompt }] }],
     });
-
     return response.text;
   } catch (error) {
-    console.error("Gemini API Error:", error);
-    throw new Error("Failed to analyze SEO. Please check your API key and input.");
+    console.error("خطأ في Gemini API:", error);
+    throw new Error("فشل تحليل SEO. يرجى التحقق من مفتاح API والبيانات المدخلة.");
   }
 };
