@@ -29,6 +29,11 @@ export const SEOForm: React.FC<SEOFormProps> = ({ onSubmit, isLoading }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-2xl border border-slate-200 shadow-sm" dir="rtl">
+      <div className="mb-4 text-right">
+        <h2 className="text-xl font-bold text-slate-800">تحليل صفحتك</h2>
+        <p className="text-sm text-slate-500 mt-1">أدخل الكلمة المفتاحية والصق كود HTML للحصول على تقرير SEO شامل.</p>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-right">
         <div className="space-y-2">
           <label className="text-xs font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-2 justify-end">
@@ -53,7 +58,7 @@ export const SEOForm: React.FC<SEOFormProps> = ({ onSubmit, isLoading }) => {
             name="serviceType"
             value={formData.serviceType}
             onChange={handleChange}
-            placeholder="مثال: نقل محلي"
+            placeholder="مثال: تنظيف، مكافحة حشرات"
             className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-right"
           />
         </div>
@@ -82,12 +87,12 @@ export const SEOForm: React.FC<SEOFormProps> = ({ onSubmit, isLoading }) => {
             onChange={handleChange}
             className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-white text-right"
           >
-            <option>Arabic</option>
-            <option>English</option>
-            <option>Spanish</option>
-            <option>French</option>
-            <option>German</option>
-            <option>Portuguese</option>
+            <option value="Arabic">عربي</option>
+            <option value="English">إنجليزي</option>
+            <option value="Spanish">إسباني</option>
+            <option value="French">فرنسي</option>
+            <option value="German">ألماني</option>
+            <option value="Portuguese">برتغالي</option>
           </select>
         </div>
 
@@ -100,7 +105,8 @@ export const SEOForm: React.FC<SEOFormProps> = ({ onSubmit, isLoading }) => {
             value={formData.url}
             onChange={handleChange}
             placeholder="https://example.com/service"
-            className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-left dir-ltr"
+            className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-left"
+            dir="ltr"
           />
         </div>
 
@@ -115,7 +121,8 @@ export const SEOForm: React.FC<SEOFormProps> = ({ onSubmit, isLoading }) => {
             onChange={handleChange}
             placeholder="قم بلصق كود HTML هنا..."
             rows={8}
-            className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-mono text-sm text-left dir-ltr"
+            className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-mono text-sm text-left"
+            dir="ltr"
           />
         </div>
       </div>
